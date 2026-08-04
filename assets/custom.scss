@@ -1,0 +1,53 @@
+/*-- scss:defaults --*/
+
+// Type
+$font-family-sans-serif:  "Inter", -apple-system, "Segoe UI", sans-serif;
+$headings-font-family:    "Source Serif 4", Georgia, serif;
+$font-size-root:          18px;
+$headings-font-weight:    600;
+$line-height-base:        1.65;
+
+// Palette
+$body-bg:                 #fdfcf9;
+$body-color:              #26241f;
+$link-color:              #9b4722;
+$link-hover-color:        #6d3018;
+
+// Navbar — kills the flat blue bar
+$navbar-bg:               #fdfcf9;
+$navbar-fg:               #26241f;
+$navbar-hl:               #9b4722;
+
+// Footer
+$footer-bg:               #fdfcf9;
+$footer-fg:               #6b6558;
+
+/*-- scss:rules --*/
+
+main {
+  max-width: 46rem;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
+.navbar {
+  border-bottom: 1px solid #e8e3d9;
+  font-size: 0.95rem;
+}
+
+.navbar-brand {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.15rem;
+}
+
+a {
+  text-underline-offset: 0.15em;
+}
+
+// About-page portrait
+.about-image {
+  border: 3px solid #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}

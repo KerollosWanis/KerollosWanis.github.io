@@ -1,0 +1,20 @@
+---
+title: ""
+page-layout: full
+about:
+  template: trestles
+  image: assets/profile.jpg
+  image-shape: round
+  image-width: 200px
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/kerolloswanis
+    - text: "{{< ai google-scholar >}} Scholar"
+      href: https://scholar.google.com/citations?user=60tQylkAAAAJ&hl
+---
+
+## Kerollos Wanis
+I am a physician-scientist at the University of Texas MD Anderson Cancer Center, with appointments in Breast Surgical Oncology, Health Services Research, and Biostatistics. My work develops and applies causal inference methodology, with a focus on defining and estimating effects that correspond to the decisions patients and clinicians actually face. In my surgical practice, I care for patients who are diagnosed with breast cancer. I am an Editor of *Epidemiology*.
+
+I trained in surgery at the University of Western Ontario and MD Anderson Cancer Center. I completed my PhD in epidemiology and MS in biostatistics at Harvard University, where I had the privilege of being mentored by Miguel Hernán, Jessica Young, and Jamie Robins.

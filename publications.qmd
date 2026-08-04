@@ -1,0 +1,69 @@
+---
+title: "Publications"
+---
+[Generated automatically from [PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=Kerollos+Wanis%5BAuthor%5D&sort=date).]{.text-muted style="font-size: 0.85em;"}
+
+```{=html}
+<div id="pubmed-pubs">Loading publications...</div>
+
+<script>
+async function fetchPubMed() {
+  const query = 'Kerollos Wanis[Author]';
+  const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(query)}&retmax=200&sort=date&retmode=json`;
+
+  try {
+    const searchRes = await fetch(searchUrl);
+    const searchData = await searchRes.json();
+    const ids = searchData.esearchresult.idlist;
+
+    if (!ids.length) {
+      document.getElementById('pubmed-pubs').innerHTML = 'No publications found.';
+      return;
+    }
+
+    const summaryUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids.join(',')}&retmode=json`;
+    const summaryRes = await fetch(summaryUrl);
+    const summaryData = await summaryRes.json();
+
+    const byYear = {};
+
+    for (const id of ids) {
+      const article = summaryData.result[id];
+      const title = article.title;
+      const journal = article.fulljournalname || article.source;
+      const pubdate = article.pubdate || '';
+      const year = pubdate.substring(0, 4) || 'Forthcoming';
+      const authors = article.authors
+        ? article.authors.map(a => a.name).join(', ')
+        : '';
+      const doi = (article.elocationid || '').replace('doi: ', '');
+      const pmidLink = `https://pubmed.ncbi.nlm.nih.gov/${id}/`;
+
+      if (!byYear[year]) byYear[year] = [];
+      byYear[year].push({ authors, title, journal, pubdate, doi, pmidLink });
+    }
+
+    const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a));
+    let html = '';
+
+    for (const year of years) {
+      html += `<h3>${year}</h3>`;
+      for (const p of byYear[year]) {
+        html += `<p style="margin-bottom: 1em;">`;
+        html += p.authors.replace(/(Wanis KN)/g, '<strong>$1</strong>');
+        html += `. ${p.title} <em>${p.journal}</em>. ${p.pubdate}.`;
+        if (p.doi) html += ` <a href="https://doi.org/${p.doi}">[DOI]</a>`;
+        html += ` <a href="${p.pmidLink}">[PubMed]</a>`;
+        html += `</p>`;
+      }
+    }
+
+    document.getElementById('pubmed-pubs').innerHTML = html;
+  } catch (e) {
+    document.getElementById('pubmed-pubs').innerHTML = 'Failed to load publications. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Wanis+KN%5BAuthor%5D&sort=date">View on PubMed</a>';
+  }
+}
+
+fetchPubMed();
+</script>
+```
